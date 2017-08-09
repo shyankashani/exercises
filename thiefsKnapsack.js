@@ -13,7 +13,7 @@ var Knapsack = function(limit) {
 Knapsack.prototype.steal = function(goods) {
 
   // Create an array fits
-  var fits = [];
+  var plunder;
 
   // Create a recursive function that accepts weightSoFar, goodsSoFar, goodsRemaining
   var recurse = (weightSoFar, goodsSoFar, goodsRemaining) => {
@@ -41,30 +41,21 @@ Knapsack.prototype.steal = function(goods) {
 
     // If number of recursions is equal to zero
     if (numberOfRecursions === 0) {
-      // Push goodsSoFar into the fits array
-      fits.push(goodsSoFar);
+
+      var plunderWorth = plunder.reduce((a, b) => { return a.worth + b.worth });
+      var goodsSoFarWorth = goodsSoFar.reduce((c, d) => { return c.worth + d.worth });
+
+      if (plunderWorth < goodsSoFarWorth) {
+        plunder = goodsSoFar;
+      }
     }
   }
 
   // Call the recursive function on zero, an empty array, and the goods array
   recurse(0, [], goods);
 
-  console.log(fits);
-
-  // Reduce the fits array
-  var fitsReduced = fits.reduce((a, b) => {
-    // Reduce the sacks, adding up all the worths
-    // If the reduction of sack a is greater than the reduction of sack b
-      // Return sack a
-    // Else
-      // Return sack b
-    return a.reduce((c, d) => { return c.worth + d.worth }) < b.reduce((e, f) => { return e.worth + f.worth })
-    ? a
-    : b
-  })
-
   // Return the reduction of the fits array
-  return fitsReduced;
+  return plunder;
 }
 
 var Good = function(name, weight, worth) {
@@ -94,4 +85,4 @@ goods.push(gold);
 
 var thiefsack = new Knapsack(60);
 
-thiefsack.steal(goods);
+thiefsack.steal([{name: '', worth: 4, weight: 4}, {name: '', worth: 4, weight: 3}, {name: '', worth: 10, weight: 1}, {name: '', worth: 3, weight: 7}]);
