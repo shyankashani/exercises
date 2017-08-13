@@ -38,7 +38,12 @@ const depthFirstSearch = (tree, callback) => {
     // Set n equal to the stack's length
     n = stack.length;
   }
+}
 
+const depthFirstSearchRecursive = (tree, callback) => {
+  callback(tree);
+  if (tree.left) { depthFirstSearchRecursive(tree.left, callback) }
+  if (tree.right) { depthFirstSearchRecursive(tree.right, callback) }
 }
 
 const tree = {
