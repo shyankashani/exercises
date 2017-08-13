@@ -18,16 +18,27 @@ const breadthFirstSearch = (tree, callback) => {
 
 const depthFirstSearch = (tree, callback) => {
   // Create a stack variable that is an array with the tree inside of it
+  let stack = [tree];
 
   // Create a variable n and set it equal to the lenght of the stack
+  let n = stack.length;
 
   // While n
+  while (n) {
+    // Create variable last
+    let last = stack.pop();
 
-  // If the last tree in the stack has a right, push that into the stack
+    // Perform the callback on the popped off element of the stack
+    callback(last);
 
-  // If the last tree in the stack has a left, push that into the stack
+    // If the last tree in the stack has a right, push that into the stack
+    if (last.right) { stack.push(last.right) }
+    // If the last tree in the stack has a left, push that into the stack
+    if (last.left) { stack.push(last.left) }
+    // Set n equal to the stack's length
+    n = stack.length;
+  }
 
-  // Pop the first
 }
 
 const tree = {
@@ -62,4 +73,4 @@ const tree = {
 
 
 
-breadthFirstSearch(tree, (node) => { console.log(node.value) });
+depthFirstSearch(tree, (node) => { console.log(node.value) });
