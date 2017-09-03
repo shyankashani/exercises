@@ -1,8 +1,18 @@
 var isPowerOfThree = function(n) {
 
-  var log3 = function(x) { return Math.log(x) / Math.log(3) };
+  if ( n === 1) { return true; }
 
-  if (Number.isInteger(log3(n))) { return true }
+  // while n does not equal 3
+  while (n !== 3) {
+    // if n is less than 3
+    if (n < 3) {
+      // return false
+      return false;
+    }
+    // divide n by 3 and set it equal to n
+    n = n / 3;
+  }
 
-  return false;
+  // return true
+  return true;
 }
