@@ -2,11 +2,8 @@ var addTwoNumbers = (l1, l2) => {
 
   // Create a recursive function that accepts a node and a number so far array
   var convertListToNumber = (node, numberSoFar) => {
-    // If the node has a value
-    if (node.val) {
-      // Unshift the number into the number so far array
-      numberSoFar.unshift(node.val);
-    }
+    // Unshift the number into the number so far array
+    numberSoFar.unshift(node.val);
     // If the node has a next
     if (node.next) {
       // Perform the recursive function on the next node and the new number so far array
@@ -38,7 +35,7 @@ var addTwoNumbers = (l1, l2) => {
 }
 
   // Declare a variable called outputList
-  var outputList;
+  var outputList = new ListNode(0);
 
   // Create a recursive function that accepts a number
   var convertNumberToList = (number) => {
@@ -46,8 +43,12 @@ var addTwoNumbers = (l1, l2) => {
     var string = number.toString();
     // Iterate through the string backward
     for (var i = string.length - 1; i > -1; i++) {
-      // Insert the toNumberization of the string into the outputList
-      insert(outputList, Number(string[i]));
+      if (i === string.length - 1) {
+        outputList.val = Number(string[i])
+      } else {
+        // Insert the toNumberization of the string into the outputList
+        insert(outputList, Number(string[i]));
+      }
     }
   }
 
