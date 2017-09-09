@@ -45,21 +45,32 @@ var mergeSort = array => {
     }
   }
 
+  // as long as there is more than one array in the array of sorted sub arrays
   while (sortedSubArrays.length > 1) {
+
+    // create an array of merged sub arrays
     var mergedSubArrays = [];
 
+    // iterate half the number of times as there are arrays in the array of sorted sub arrays
     for (var i = 0; i < Math.floor(sortedSubArrays.length / 2); i++) {
+      // merge the sub array with the next sub array
       var mergedSubArray = merge(sortedSubArrays[i * 2], sortedSubArrays[i * 2 + 1]);
+
+      // push the merged sub array into the array of merged sub arrays
       mergedSubArrays.push(mergedSubArray);
     }
 
+    // if there are an odd number of sorted sub arrays
     if (sortedSubArrays.length % 2) {
+      // push the last sorted sub array into the array of merged sub arrays
       mergedSubArrays.push(sortedSubArrays[sortedSubArrays.length - 1]);
     }
 
+    // set the array of sorted sub arrays equal to the array of merged sub arrays
     sortedSubArrays = mergedSubArrays;
   }
 
+  // return the sorted array
   return sortedSubArrays[0];
 
 };
