@@ -16,22 +16,32 @@ var merge = (leftArray, rightArray) => {
 };
 
 var mergeSort = array => {
+  // separate array into an array of sorted sub arrays
+  var sortedSubArrays = [];
 
-  var lists = [];
-  var currentList = [];
+  // keep track of current sub array
+  var currentSubArray = [];
 
+  // iterate through the items in the array
   for (var i = 0; i < array.length; i++) {
-
-    var lastIndex = currentList.length - 1;
-    if (currentList.length !== 0 && array[i] < currentList[lastIndex]) {
-      lists.push(currentList);
-      currentList = [];
+    // if the current sub array is empty
+    // or if the item in the array is greater than or equal to the last item in the current sub array
+    if (!currentSubArray.length || currentSubArray[currentSubArray.length - 1] <= array[i])
+      // push the item into the current sub array
+      currentSubArray.push(array[i]);
+    // otherwise
+    else {
+      // push the current sub array into the array of sub arrays
+      sortedSubArrays.push(currentSubArray);
+      // empty the current sub array
+      currentSubArray = [array[i]];
     }
-    currentList.push(array[i]);
+    
+    if (i + 1 === array.length) {
+      sortedSubArrays.push(currentSubArray);
+    }
   }
-  lists.push(currentList);
 
-  while (lists.length > 1) {
-    newLists
-  }
+  // return the array of sorted sub arrays
+  return sortedSubArrays;
 };
