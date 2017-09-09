@@ -45,6 +45,21 @@ var mergeSort = array => {
     }
   }
 
-  // return the array of sorted sub arrays
-  return sortedSubArrays;
+  while (sortedSubArrays.length > 1) {
+    var mergedSubArrays = [];
+
+    for (var i = 0; i < Math.floor(sortedSubArrays.length / 2); i++) {
+      var mergedSubArray = merge(sortedSubArrays[i * 2], sortedSubArrays[i * 2 + 1]);
+      mergedSubArrays.push(mergedSubArray);
+    }
+
+    if (sortedSubArrays.length % 2) {
+      mergedSubArrays.push(sortedSubArrays[sortedSubArrays.length - 1]);
+    }
+
+    sortedSubArrays = mergedSubArrays;
+  }
+
+  return sortedSubArrays[0];
+
 };
