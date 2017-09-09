@@ -24,6 +24,13 @@ var mergeSort = array => {
 
   // iterate through the items in the array
   for (var i = 0; i < array.length; i++) {
+
+    // if the item is the last item
+    if (i + 1 === array.length) {
+      // push the current sub array into the array of sorted sub arrays
+      sortedSubArrays.push(currentSubArray);
+    }
+
     // if the current sub array is empty
     // or if the item in the array is greater than or equal to the last item in the current sub array
     if (!currentSubArray.length || currentSubArray[currentSubArray.length - 1] <= array[i])
@@ -33,12 +40,8 @@ var mergeSort = array => {
     else {
       // push the current sub array into the array of sub arrays
       sortedSubArrays.push(currentSubArray);
-      // empty the current sub array
+      // create a new current sub array with the item as the first item
       currentSubArray = [array[i]];
-    }
-    
-    if (i + 1 === array.length) {
-      sortedSubArrays.push(currentSubArray);
     }
   }
 
