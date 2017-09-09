@@ -25,12 +25,6 @@ var mergeSort = array => {
   // iterate through the items in the array
   for (var i = 0; i < array.length; i++) {
 
-    // if the item is the last item
-    if (i + 1 === array.length) {
-      // push the current sub array into the array of sorted sub arrays
-      sortedSubArrays.push(currentSubArray);
-    }
-
     // if the current sub array is empty
     // or if the item in the array is greater than or equal to the last item in the current sub array
     if (!currentSubArray.length || currentSubArray[currentSubArray.length - 1] <= array[i])
@@ -43,31 +37,19 @@ var mergeSort = array => {
       // create a new current sub array with the item as the first item
       currentSubArray = [array[i]];
     }
+
+    // if the item is the last item
+    if (i + 1 === array.length) {
+      // push the current sub array into the array of sorted sub arrays
+      sortedSubArrays.push(currentSubArray);
+    }
   }
 
-  // as long as there is more than one array in the array of sorted sub arrays
-  while (sortedSubArrays.length > 1) {
-
-    // create an array of merged sub arrays
-    var mergedSubArrays = [];
-
-    // iterate half the number of times as there are arrays in the array of sorted sub arrays
-    for (var i = 0; i < Math.floor(sortedSubArrays.length / 2); i++) {
-      // merge the sub array with the next sub array
-      var mergedSubArray = merge(sortedSubArrays[i * 2], sortedSubArrays[i * 2 + 1]);
-
-      // push the merged sub array into the array of merged sub arrays
-      mergedSubArrays.push(mergedSubArray);
-    }
-
-    // if there are an odd number of sorted sub arrays
-    if (sortedSubArrays.length % 2) {
-      // push the last sorted sub array into the array of merged sub arrays
-      mergedSubArrays.push(sortedSubArrays[sortedSubArrays.length - 1]);
-    }
-
-    // set the array of sorted sub arrays equal to the array of merged sub arrays
-    sortedSubArrays = mergedSubArrays;
+  // while the number of sub arrays is greater than one
+  while (1 < sortedSubArrays.length) {
+    // merge the zeroeth sub array with the oneth sub array
+    sortedSubArrays[0] = merge(sortedSubArrays[0], sortedSubArrays[1]);
+    sortedSubArrays.splice(1, 1);
   }
 
   // return the sorted array
