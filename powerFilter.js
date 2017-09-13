@@ -15,19 +15,21 @@ var powerFilter = array => {
     var modified = array[i];
 
     // create a loop variable and set it equal to true
-    var loop = true;
+    // var loop = true;
     // as long as the loop variable is true
-    while (loop) {
+    while (true) {
       // if dividing the number by two yields a remainder
       if (modified % 2 !== 0) {
         // set the loop variable to false
-        loop = false;
+        // loop = false;
+        break;
       // otherwise if dividing the number by two yields two
       } else if (modified / 2 === 2 || modified / 2 === 1) {
         // push the number into the results array
         results.push(original);
         // set the loop variable to false
-        loop = false;
+        // loop = false;
+        break;
       // otherwise divide the number by two
       } else {
         modified = modified / 2;
